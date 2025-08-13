@@ -69,6 +69,23 @@ class TransactionController extends Controller
     ]);
 }
 
+    public function confirm(string $transaction_id)
+{
+    $transaction = Transaction::where('transaction_id', $transaction_id)->first();
+
+    if (!$transaction) {
+        return response()->json(['error' => 'Transaction not found'], 404);
+    }
+
+    $transaction->status = 'success';
+    $transaction->save();
+
+    return response()->json([
+        'transaction_id' => $transaction->transaction_id,
+        'message' => 'Confirm in progress. Please, check transaction status.'
+    ]);
+}
+
     /**
      * Update the specified resource in storage.
      */

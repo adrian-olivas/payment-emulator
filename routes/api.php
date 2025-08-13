@@ -11,4 +11,6 @@ Route::get('/user', function (Request $request) {
 Route::post('/transaction/create', [TransactionController::class, 'store'])
      ->middleware('signature.verify');
 
+Route::get('/transaction/confirm/{transaction_id}', [TransactionController::class, 'confirm']);
+
 Route::get('/transaction/{transaction_id}/status', [TransactionController::class, 'show']);
